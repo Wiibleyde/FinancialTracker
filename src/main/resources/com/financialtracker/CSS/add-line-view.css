@@ -1,0 +1,28 @@
+
+.root {
+    -fx-font-family: 'Arial';
+    -fx-padding: 20;
+    -fx-background-color: #f0f0f0;
+}
+
+.text-field {
+    -fx-pref-width: 300;
+    -fx-font-size: 14px;
+    -fx-padding: 10;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10 20;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.button:hover {
+    -fx-background-color: #45a049;
+}

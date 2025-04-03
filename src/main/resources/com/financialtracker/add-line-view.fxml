@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.financialtracker.AddLineView"
+            prefHeight="400.0" prefWidth="600.0"
+            stylesheets="@CSS/add-line-view.css">
+    <VBox alignment="CENTER" spacing="10.0">
+        <Label text="Période" />
+        <TextField fx:id="periodField" promptText="Période" />
+        <Label text="Logement" />
+        <TextField fx:id="housingField" promptText="Logement" />
+        <Label text="Nourriture" />
+        <TextField fx:id="foodField" promptText="Nourriture" />
+        <Label text="Sorties" />
+        <TextField fx:id="exitsField" promptText="Sorties" />
+        <Label text="Voiture/Transport" />
+        <TextField fx:id="transportField" promptText="Voiture/Transport" />
+        <Label text="Voyage" />
+        <TextField fx:id="travelField" promptText="Voyage" />
+        <Label text="Impôts" />
+        <TextField fx:id="taxesField" promptText="Impôts" />
+        <Label text="Autres" />
+        <TextField fx:id="otherField" promptText="Autres" />
+        <Button text="Ajouter" onAction="#addLine" />
+    </VBox>
+</AnchorPane>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import com.financialtracker.Line?>
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.financialtracker.HelloController" stylesheets="@CSS/main-view.css">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+
+    <Label fx:id="welcomeText" />
+
+    <!-- Text to present the page  -->
+    <Label text="Tableau de bord" styleClass="page-title" />
+
+    <HBox alignment="CENTER">
+        <TableView fx:id="tableView" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="period" text="Période">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="period" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="total" text="Total">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="total" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="housing" text="Logement">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="housing" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="food" text="Nourriture">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="food" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="exits" text="Sorties">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="exits" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="transport" text="Voiture/Transport">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="transport" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="travel" text="Voyage">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="travel" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="taxes" text="Impôts">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="taxes" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="other" text="Autres">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="other" />
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <Line period="2020-01" total="1000.0" housing="100.0" food="100.0" exits="100.0" transport="100.0" travel="100.0" taxes="100.0" other="100.0" />
+                    <Line period="2020-02" total="1000.0" housing="100.0" food="100.0" exits="100.0" transport="100.0" travel="100.0" taxes="100.0" other="100.0" />
+                    <Line period="2020-03" total="1000.0" housing="100.0" food="100.0" exits="100.0" transport="100.0" travel="100.0" taxes="100.0" other="100.0" />
+                </FXCollections>
+            </items>
+        </TableView>
+        <Button fx:id="addButton" text="Ajouter" onAction="#openAddLineView" />
+    </HBox>
+</VBox>
