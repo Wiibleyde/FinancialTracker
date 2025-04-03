@@ -1,0 +1,69 @@
+name: Build and Release Installer
+
+on: 
+    push:
+        branches:
+        - main
+
+jobs:
+  build-app:
+    strategy:
+      matrix:
+        os: [ macos-latest, ubuntu-latest, windows-latest ]
+    name: Build the application
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '22'
+          distribution: 'temurin'
+
+      - name: Extract version from build.gradle
+        id: extract_version
+        run: |
+          VERSION=$(grep "^version" build.gradle | awk '{print $2}' | tr -d "'")
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Build application
+        run: ./gradlew jpackage
+        env:
+          JAVA_HOME: ${{ steps.java.outputs.java-home }}
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: FinancialTracker-${{ env.VERSION }}-${{ matrix.os }}
+          path: build/jpackage/*
+
+  create-release:
+    needs: build-app
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ env.VERSION }}
+          release_name: FinancialTracker v${{ env.VERSION }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-release.outputs.upload_url }}
+          asset_path: build/jpackage/*
+          asset_name: FinancialTracker-${{ env.VERSION }}-${{ matrix.os }}
+          asset_content_type: application/octet-stream
+
+
+
+
+

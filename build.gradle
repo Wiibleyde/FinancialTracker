@@ -62,14 +62,12 @@ jlink {
                 "--icon", file("src/main/resources/com/financialtracker/favicon.ico").absolutePath
         ]
     }
-    if (System.getProperty("os.name").toLowerCase().contains("mac")) {
-        jpackage {
-            imageName = "FinancialTracker"
-            installerType = "dmg"
-            installerOptions = [
-                    "--icon", file("src/main/resources/com/financialtracker/favicon.icns").absolutePath
-            ]
-        }
+    jpackage {
+        imageName = "FinancialTracker"
+        installerType = "dmg"
+        installerOptions = [
+                "--icon", file("src/main/resources/com/financialtracker/favicon.icns").absolutePath
+        ]
     }
 }
 jlinkZip {
