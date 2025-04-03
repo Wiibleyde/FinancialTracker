@@ -50,25 +50,24 @@ jlink {
     }
     jpackage {
         imageName = "FinancialTracker"
-        if (OperatingSystem.current().isMacOsX()) {
+        def osName = System.getProperty("os.name").toLowerCase()
+        if (osName.contains("mac")) {
             installerType = "dmg"
-        } else if (OperatingSystem.current().isLinux()) {
-            installerType = "deb"
-        } else if (OperatingSystem.current().isWindows()) {
-            installerType = "exe"
-        }
-        if (OperatingSystem.current().isMacOsX()) {
             installerOptions = [
                     "--icon", file("src/main/resources/com/financialtracker/favicon.icns").absolutePath
             ]
-        } else if (OperatingSystem.current().isLinux()) {
+        } else if (osName.contains("linux")) {
+            installerType = "deb"
             installerOptions = [
                     "--icon", file("src/main/resources/com/financialtracker/favicon.png").absolutePath
             ]
-        } else if (OperatingSystem.current().isWindows()) {
+        } else if (osName.contains("windows")) {
+            installerType = "exe"
             installerOptions = [
                     "--icon", file("src/main/resources/com/financialtracker/favicon.ico").absolutePath
             ]
+        } else {
+            throw new GradleException("Unsupported operating system: " + osName)
         }
     }
 }
