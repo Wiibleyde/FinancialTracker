@@ -9,7 +9,8 @@ jobs:
   build-app:
     strategy:
       matrix:
-        os: [ ubuntu-latest, windows-latest ]
+        os: [ macos-latest, ubuntu-latest, windows-latest ]
+        installer_type: [ dmg, deb, exe ]
     name: Build the application
     runs-on: ${{ matrix.os }}
     steps:
@@ -25,20 +26,30 @@ jobs:
       - name: Extract version from build.gradle
         id: extract_version
         run: |
-          VERSION=$(grep "^version" build.gradle | awk '{print $2}' | tr -d "'")
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          $versionLine = Get-Content build.gradle | Select-String -Pattern "^version"
+          $version = $versionLine -replace "version ", "" -replace "'", ""
+          echo "VERSION=$version" >> $env:GITHUB_ENV
+        shell: pwsh
 
       - name: Build application
+        if: |
+          (matrix.os == 'macos-latest' && matrix.installer_type == 'dmg') ||
+          (matrix.os == 'ubuntu-latest' && matrix.installer_type == 'deb') ||
+          (matrix.os == 'windows-latest' && matrix.installer_type == 'exe')
         run: ./gradlew jpackage
         env:
           JAVA_HOME: ${{ steps.java.outputs.java-home }}
 
       - name: Upload artifacts
+        if: |
+          (matrix.os == 'macos-latest' && matrix.installer_type == 'dmg') ||
+          (matrix.os == 'ubuntu-latest' && matrix.installer_type == 'deb') ||
+          (matrix.os == 'windows-latest' && matrix.installer_type == 'exe')
         uses: actions/upload-artifact@v4
         with:
-          name: FinancialTracker-${{ env.VERSION }}-${{ matrix.os }}
+          name: FinancialTracker-${{ env.VERSION }}-${{ matrix.os }}-${{ matrix.installer_type }}
           path: build/jpackage/*
-
+          
   create-release:
     needs: build-app
     runs-on: ubuntu-latest
@@ -60,7 +71,7 @@ jobs:
         with:
           upload_url: ${{ steps.create-release.outputs.upload_url }}
           asset_path: build/jpackage/*
-          asset_name: FinancialTracker-${{ env.VERSION }}-${{ matrix.os }}
+          asset_name: FinancialTracker-${{ env.VERSION }}-${{ matrix.os }}-${{ matrix.installer_type }}
           asset_content_type: application/octet-stream
 
 

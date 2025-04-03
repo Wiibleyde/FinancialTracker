@@ -54,6 +54,11 @@ jlink {
         installerOptions = [
                 "--icon", file("src/main/resources/com/financialtracker/favicon.png").absolutePath
         ]
+        doLast {
+            if (!System.getProperty("os.name").toLowerCase().contains("linux")) {
+                throw new GradleException("This task can only be run on Linux.")
+            }
+        }
     }
     jpackage {
         imageName = "FinancialTracker"
@@ -61,14 +66,24 @@ jlink {
         installerOptions = [
                 "--icon", file("src/main/resources/com/financialtracker/favicon.ico").absolutePath
         ]
+        doLast {
+            if (!System.getProperty("os.name").toLowerCase().contains("windows")) {
+                throw new GradleException("This task can only be run on Windows.")
+            }
+        }
     }
-    // jpackage {
-    //     imageName = "FinancialTracker"
-    //     installerType = "dmg"
-    //     installerOptions = [
-    //             "--icon", file("src/main/resources/com/financialtracker/favicon.icns").absolutePath
-    //     ]
-    // }
+    jpackage {
+        imageName = "FinancialTracker"
+        installerType = "dmg"
+        installerOptions = [
+                "--icon", file("src/main/resources/com/financialtracker/favicon.icns").absolutePath
+        ]
+        doLast {
+            if (!System.getProperty("os.name").toLowerCase().contains("mac")) {
+                throw new GradleException("This task can only be run on macOS.")
+            }
+        }
+    }
 }
 jlinkZip {
     group = 'distribution'
