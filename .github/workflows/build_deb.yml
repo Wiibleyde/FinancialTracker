@@ -14,7 +14,7 @@ jobs:
           uses: actions/setup-java@v2
           with:
               java-version: '22'
-              distribution: 'corretto'
+              distribution: 'temurin'
         - name: Extract Version from build.gradle
           id: get_version
           run: |
