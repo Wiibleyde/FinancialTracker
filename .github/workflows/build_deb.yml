@@ -1,0 +1,21 @@
+on:
+    release:
+        types:
+        - created
+# Build java fx app for debian
+
+jobs:
+    build_deb:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+        - name: Set up JDK 22
+          uses: actions/setup-java@v2
+          with:
+              java-version: '22'
+              distribution: 'corretto'
+        - name: Build Debian Package
+          run: ./gradlew jlink jpackage
+        - name: Create Release Tag
+          run: git tag -a "v${{ github.event.release.tag_name }}" -m "Release ${{ github.event.release.tag_name }}"
