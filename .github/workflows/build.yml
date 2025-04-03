@@ -9,13 +9,7 @@ jobs:
   build-app:
     strategy:
       matrix:
-        include:
-          - os: macos-latest
-            installer_type: dmg
-          - os: ubuntu-latest
-            installer_type: deb
-          - os: windows-latest
-            installer_type: exe
+        os: [ macos-latest, ubuntu-latest, windows-latest ]
     name: Build the application
     runs-on: ${{ matrix.os }}
     steps:
@@ -31,10 +25,8 @@ jobs:
       - name: Extract version from build.gradle
         id: extract_version
         run: |
-          $versionLine = Get-Content build.gradle | Select-String -Pattern "^version"
-          $version = $versionLine -replace "version ", "" -replace "'", ""
-          echo "VERSION=$version" >> $env:GITHUB_ENV
-        shell: pwsh
+          VERSION=$(grep "^version" build.gradle | awk '{print $2}' | tr -d "'")
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Build application
         run: ./gradlew jpackage
@@ -44,9 +36,9 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: FinancialTracker-${{ env.VERSION }}-${{ matrix.os }}-${{ matrix.installer_type }}
+          name: FinancialTracker-${{ env.VERSION }}-${{ matrix.os }}
           path: build/jpackage/*
-          
+
   create-release:
     needs: build-app
     runs-on: ubuntu-latest
@@ -68,7 +60,7 @@ jobs:
         with:
           upload_url: ${{ steps.create-release.outputs.upload_url }}
           asset_path: build/jpackage/*
-          asset_name: FinancialTracker-${{ env.VERSION }}-${{ matrix.os }}-${{ matrix.installer_type }}
+          asset_name: FinancialTracker-${{ env.VERSION }}-${{ matrix.os }}
           asset_content_type: application/octet-stream
 
 

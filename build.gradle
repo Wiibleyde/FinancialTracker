@@ -50,38 +50,25 @@ jlink {
     }
     jpackage {
         imageName = "FinancialTracker"
-        installerType = "deb"
-        installerOptions = [
-                "--icon", file("src/main/resources/com/financialtracker/favicon.png").absolutePath
-        ]
-        doLast {
-            if (!System.getProperty("os.name").toLowerCase().contains("linux")) {
-                throw new GradleException("This task can only be run on Linux.")
-            }
+        if (OperatingSystem.current().isMacOsX()) {
+            installerType = "dmg"
+        } else if (OperatingSystem.current().isLinux()) {
+            installerType = "deb"
+        } else if (OperatingSystem.current().isWindows()) {
+            installerType = "exe"
         }
-    }
-    jpackage {
-        imageName = "FinancialTracker"
-        installerType = "exe"
-        installerOptions = [
-                "--icon", file("src/main/resources/com/financialtracker/favicon.ico").absolutePath
-        ]
-        doLast {
-            if (!System.getProperty("os.name").toLowerCase().contains("windows")) {
-                throw new GradleException("This task can only be run on Windows.")
-            }
-        }
-    }
-    jpackage {
-        imageName = "FinancialTracker"
-        installerType = "dmg"
-        installerOptions = [
-                "--icon", file("src/main/resources/com/financialtracker/favicon.icns").absolutePath
-        ]
-        doLast {
-            if (!System.getProperty("os.name").toLowerCase().contains("mac")) {
-                throw new GradleException("This task can only be run on macOS.")
-            }
+        if (OperatingSystem.current().isMacOsX()) {
+            installerOptions = [
+                    "--icon", file("src/main/resources/com/financialtracker/favicon.icns").absolutePath
+            ]
+        } else if (OperatingSystem.current().isLinux()) {
+            installerOptions = [
+                    "--icon", file("src/main/resources/com/financialtracker/favicon.png").absolutePath
+            ]
+        } else if (OperatingSystem.current().isWindows()) {
+            installerOptions = [
+                    "--icon", file("src/main/resources/com/financialtracker/favicon.ico").absolutePath
+            ]
         }
     }
 }
