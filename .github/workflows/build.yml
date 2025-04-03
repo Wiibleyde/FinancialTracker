@@ -9,8 +9,13 @@ jobs:
   build-app:
     strategy:
       matrix:
-        os: [ macos-latest, ubuntu-latest, windows-latest ]
-        installer_type: [ dmg, deb, exe ]
+        include:
+          - os: macos-latest
+            installer_type: dmg
+          - os: ubuntu-latest
+            installer_type: deb
+          - os: windows-latest
+            installer_type: exe
     name: Build the application
     runs-on: ${{ matrix.os }}
     steps:
@@ -32,19 +37,11 @@ jobs:
         shell: pwsh
 
       - name: Build application
-        if: |
-          (matrix.os == 'macos-latest' && matrix.installer_type == 'dmg') ||
-          (matrix.os == 'ubuntu-latest' && matrix.installer_type == 'deb') ||
-          (matrix.os == 'windows-latest' && matrix.installer_type == 'exe')
         run: ./gradlew jpackage
         env:
           JAVA_HOME: ${{ steps.java.outputs.java-home }}
 
       - name: Upload artifacts
-        if: |
-          (matrix.os == 'macos-latest' && matrix.installer_type == 'dmg') ||
-          (matrix.os == 'ubuntu-latest' && matrix.installer_type == 'deb') ||
-          (matrix.os == 'windows-latest' && matrix.installer_type == 'exe')
         uses: actions/upload-artifact@v4
         with:
           name: FinancialTracker-${{ env.VERSION }}-${{ matrix.os }}-${{ matrix.installer_type }}
