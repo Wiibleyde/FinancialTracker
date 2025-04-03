@@ -1,7 +1,7 @@
 on:
-    release:
-        types:
-        - created
+    push:
+        branches:
+        - main
 # Build java fx app for debian
 
 jobs:
@@ -15,7 +15,16 @@ jobs:
           with:
               java-version: '22'
               distribution: 'corretto'
+        - name: Extract Version from build.gradle
+          id: get_version
+          run: |
+            VERSION=$(grep "^version" build.gradle | awk '{print $2}' | tr -d "'")
+            echo "VERSION=$VERSION" >> $GITHUB_ENV
         - name: Build Debian Package
           run: ./gradlew jlink jpackage
-        - name: Create Release Tag
-          run: git tag -a "v${{ github.event.release.tag_name }}" -m "Release ${{ github.event.release.tag_name }}"
+        - name: Create Tag
+          run: |
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git tag -a "v${{ env.VERSION }}" -m "Release v${{ env.VERSION }}"
+            git push origin "v${{ env.VERSION }}"
