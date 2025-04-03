@@ -34,7 +34,7 @@ jobs:
           JAVA_HOME: ${{ steps.java.outputs.java-home }}
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: FinancialTracker-${{ env.VERSION }}-${{ matrix.os }}
           path: build/jpackage/*
