@@ -17,7 +17,7 @@ public class Dashboard {
     private PieChart pieChart;
 
     @FXML
-    private LineChart<String, Number> lineChart;
+    private LineChart<String, Number> lineChart; // Changer Date en String
 
     @FXML
     private ChoiceBox<String> periodChoiceBox;
@@ -33,30 +33,30 @@ public class Dashboard {
         String[] categories = {"Housing", "Food", "Exits", "Transport", "Travel", "Taxes", "Other"};
 
         for (String category : categories) {
-            XYChart.Series<String, Number> series = new XYChart.Series<>();
+            XYChart.Series<String, Number> series = new XYChart.Series<>(); // Changer Date en String
             series.setName(category);
             for (Line line : expenses) {
                 switch (category) {
                     case "Housing":
-                        series.getData().add(new XYChart.Data<>(line.getPeriod(), line.getHousing()));
+                        series.getData().add(new XYChart.Data<>(line.getPeriod().toString(), line.getHousing())); // Utiliser toString()
                         break;
                     case "Food":
-                        series.getData().add(new XYChart.Data<>(line.getPeriod(), line.getFood()));
+                        series.getData().add(new XYChart.Data<>(line.getPeriod().toString(), line.getFood())); // Utiliser toString()
                         break;
                     case "Exits":
-                        series.getData().add(new XYChart.Data<>(line.getPeriod(), line.getExits()));
+                        series.getData().add(new XYChart.Data<>(line.getPeriod().toString(), line.getExits())); // Utiliser toString()
                         break;
                     case "Transport":
-                        series.getData().add(new XYChart.Data<>(line.getPeriod(), line.getTransport()));
+                        series.getData().add(new XYChart.Data<>(line.getPeriod().toString(), line.getTransport())); // Utiliser toString()
                         break;
                     case "Travel":
-                        series.getData().add(new XYChart.Data<>(line.getPeriod(), line.getTravel()));
+                        series.getData().add(new XYChart.Data<>(line.getPeriod().toString(), line.getTravel())); // Utiliser toString()
                         break;
                     case "Taxes":
-                        series.getData().add(new XYChart.Data<>(line.getPeriod(), line.getTaxes()));
+                        series.getData().add(new XYChart.Data<>(line.getPeriod().toString(), line.getTaxes())); // Utiliser toString()
                         break;
                     case "Other":
-                        series.getData().add(new XYChart.Data<>(line.getPeriod(), line.getOther()));
+                        series.getData().add(new XYChart.Data<>(line.getPeriod().toString(), line.getOther())); // Utiliser toString()
                         break;
                 }
             }
@@ -99,7 +99,7 @@ public class Dashboard {
     private List<String> getLast12Periods() {
         List<String> periods = new ArrayList<>();
         LocalDate currentDate = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         for (int i = 0; i < 12; i++) {
             periods.add(currentDate.minusMonths(i).format(formatter));

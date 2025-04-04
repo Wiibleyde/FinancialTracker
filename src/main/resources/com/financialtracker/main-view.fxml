@@ -66,9 +66,7 @@
             </columns>
             <items>
                 <FXCollections fx:factory="observableArrayList">
-                    <Line period="2020-01" total="1000.0" housing="100.0" food="100.0" exits="100.0" transport="100.0" travel="100.0" taxes="100.0" other="100.0" />
-                    <Line period="2020-02" total="1000.0" housing="100.0" food="100.0" exits="100.0" transport="100.0" travel="100.0" taxes="100.0" other="100.0" />
-                    <Line period="2020-03" total="1000.0" housing="100.0" food="100.0" exits="100.0" transport="100.0" travel="100.0" taxes="100.0" other="100.0" />
+
                 </FXCollections>
             </items>
         </TableView>

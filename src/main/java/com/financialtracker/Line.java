@@ -1,7 +1,12 @@
 package com.financialtracker;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
+import java.sql.Date;
+
 public class Line {
-    private String period;
+    private Date period;
     private Float total;
     private Float housing;
     private Float food;
@@ -13,11 +18,18 @@ public class Line {
 
     public Line() {}
 
-    public String getPeriod() {
+    public StringProperty dateProperty() {
+        if (period == null) {
+            return new SimpleStringProperty("");
+        }
+        return new SimpleStringProperty(period.toString());
+    }
+
+    public Date getPeriod() {
         return period;
     }
 
-    public void setPeriod(String period) {
+    public void setPeriod(Date period) {
         this.period = period;
     }
 

@@ -17,7 +17,7 @@ public class ExpenseDAO {
         try (Connection connection = Database.connect()) {
             assert connection != null;
             PreparedStatement statement = connection.prepareStatement(insertExpense);
-            statement.setString(1, line.getPeriod());
+            statement.setString(1, line.getPeriod().toString());
             statement.setFloat(2, line.getHousing());
             statement.setFloat(3, line.getFood());
             statement.setFloat(4, line.getExits());
@@ -41,7 +41,7 @@ public class ExpenseDAO {
             var resultSet = statement.getResultSet();
             while (resultSet.next()) {
                 Line line = new Line();
-                line.setPeriod(resultSet.getString("date"));
+                line.setPeriod(java.sql.Date.valueOf(resultSet.getString("date")));
                 line.setHousing(resultSet.getFloat("housing"));
                 line.setFood(resultSet.getFloat("food"));
                 line.setExits(resultSet.getFloat("goingOut"));
@@ -67,7 +67,7 @@ public class ExpenseDAO {
             statement.execute();
             var resultSet = statement.getResultSet();
             if (resultSet.next()) {
-                line.setPeriod(resultSet.getString("date"));
+                line.setPeriod(java.sql.Date.valueOf(resultSet.getString("date")));
                 line.setHousing(resultSet.getFloat("housing"));
                 line.setFood(resultSet.getFloat("food"));
                 line.setExits(resultSet.getFloat("goingOut"));
@@ -93,7 +93,7 @@ public class ExpenseDAO {
             statement.execute();
             var resultSet = statement.getResultSet();
             if (resultSet.next()) {
-                line.setPeriod(resultSet.getString("date"));
+                line.setPeriod(java.sql.Date.valueOf(resultSet.getString("date")));
                 line.setHousing(resultSet.getFloat("housing"));
                 line.setFood(resultSet.getFloat("food"));
                 line.setExits(resultSet.getFloat("goingOut"));

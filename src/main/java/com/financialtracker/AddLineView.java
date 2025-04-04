@@ -32,7 +32,7 @@ public class AddLineView {
     @FXML
     public void addLine() {
         Line newLine = new Line();
-        newLine.setPeriod(periodField.getText());
+        newLine.setPeriod(java.sql.Date.valueOf(periodField.getText()));
         newLine.setHousing(Float.parseFloat(housingField.getText()));
         newLine.setFood(Float.parseFloat(foodField.getText()));
         newLine.setExits(Float.parseFloat(exitsField.getText()));
