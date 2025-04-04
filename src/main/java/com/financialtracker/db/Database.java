@@ -51,7 +51,7 @@ public class  Database {
     }
 
     private static boolean createTableIfNotExists() {
-        String createTables =
+        String createExpenseTable =
                 """
                         CREATE TABLE IF NOT EXISTS expense(
                              date TEXT NOT NULL,
@@ -64,9 +64,22 @@ public class  Database {
                              other REAL NOT NULL
                      );
                    """;
+        String createIncomeTable =
+                """
+                    CREATE TABLE IF NOT EXISTS income(
+                             date TEXT NOT NULL,
+                             salary REAL NOT NULL,
+                             grant REAL NOT NULL,
+                             buisnessSalary REAL NOT NULL,
+                             passiveIncome REAL NOT NULL,
+                             other REAL NOT NULL
+                    );
+                   """;
 
         try (Connection connection = Database.connect()) {
-            PreparedStatement statement = connection.prepareStatement(createTables);
+            PreparedStatement statement = connection.prepareStatement(createExpenseTable);
+            statement.executeUpdate();
+            statement = connection.prepareStatement(createIncomeTable);
             statement.executeUpdate();
             return true;
         } catch (SQLException exception) {
