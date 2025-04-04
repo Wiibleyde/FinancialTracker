@@ -4,6 +4,7 @@ import com.financialtracker.db.ExpenseDAO;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 
 import java.util.List;
 
@@ -11,6 +12,8 @@ public class Dashboard {
     @FXML
     private PieChart pieChart;
 
+    @FXML
+    private LineChart<String, Number> lineChart;
 
     @FXML
     public void initialize() {
@@ -28,13 +31,41 @@ public class Dashboard {
         pieChart.setTitle("Expense Distribution for " + lastMonthData.getPeriod());
         pieChart.setLegendVisible(true);
         pieChart.setLabelsVisible(true);
-    }
 
-    public void setPieChart(PieChart pieChart) {
-        this.pieChart = pieChart;
-    }
+        // Initialize the line chart with data
+        List<Line> expenses = ExpenseDAO.getExpenses();
+        String[] categories = {"Housing", "Food", "Exits", "Transport", "Travel", "Taxes", "Other"};
 
-    public PieChart getPieChart() {
-        return pieChart;
+        for (String category : categories) {
+            XYChart.Series<String, Number> series = new XYChart.Series<>();
+            series.setName(category);
+            for (Line line : expenses) {
+                switch (category) {
+                    case "Housing":
+                        series.getData().add(new XYChart.Data<>(line.getPeriod(), line.getHousing()));
+                        break;
+                    case "Food":
+                        series.getData().add(new XYChart.Data<>(line.getPeriod(), line.getFood()));
+                        break;
+                    case "Exits":
+                        series.getData().add(new XYChart.Data<>(line.getPeriod(), line.getExits()));
+                        break;
+                    case "Transport":
+                        series.getData().add(new XYChart.Data<>(line.getPeriod(), line.getTransport()));
+                        break;
+                    case "Travel":
+                        series.getData().add(new XYChart.Data<>(line.getPeriod(), line.getTravel()));
+                        break;
+                    case "Taxes":
+                        series.getData().add(new XYChart.Data<>(line.getPeriod(), line.getTaxes()));
+                        break;
+                    case "Other":
+                        series.getData().add(new XYChart.Data<>(line.getPeriod(), line.getOther()));
+                        break;
+                }
+            }
+            lineChart.getData().add(series);
+        }
+        lineChart.setTitle("Expenses Over Time");
     }
 }
