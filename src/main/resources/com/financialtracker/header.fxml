@@ -8,5 +8,6 @@
     <Menu text="Menu 1">
         <MenuItem text="Tableau" onAction="#handleItem1"/>
         <MenuItem text="Dashoard" onAction="#handleItem2"/>
+        <MenuItem text="Revenus" onAction="#handleItem3"/>
     </Menu>
 </MenuBar>

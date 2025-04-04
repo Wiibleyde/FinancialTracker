@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Database {
+public class  Database {
 
     /**
      * Location of database

@@ -15,4 +15,9 @@ public class Header {
     private void handleItem2() throws IOException {
         HelloApplication.changeScene("dashboard-view.fxml");
     }
+
+    @FXML
+    private void handleItem3() throws IOException {
+        HelloApplication.changeScene("incomes-view.fxml");
+    }
 }
