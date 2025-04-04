@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" stylesheets="@CSS/main-view.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.financialtracker.Dashboard">
+    <fx:include fx:id="header" source="header.fxml" />
+    <PieChart fx:id="pieChart" />
+    <Label styleClass="page-title" text="Dashboard" />
+</VBox>

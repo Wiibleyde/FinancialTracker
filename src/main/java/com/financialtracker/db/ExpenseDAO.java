@@ -57,4 +57,29 @@ public class ExpenseDAO {
         }
         return expenses;
     }
+
+    public static Line getLastMonthExpenses() {
+        String getLastMonthExpenses = "SELECT * FROM expense ORDER BY date DESC LIMIT 1";
+        Line line = new Line();
+        try (Connection connection = Database.connect()) {
+            assert connection != null;
+            PreparedStatement statement = connection.prepareStatement(getLastMonthExpenses);
+            statement.execute();
+            var resultSet = statement.getResultSet();
+            if (resultSet.next()) {
+                line.setPeriod(resultSet.getString("date"));
+                line.setHousing(resultSet.getFloat("housing"));
+                line.setFood(resultSet.getFloat("food"));
+                line.setExits(resultSet.getFloat("goingOut"));
+                line.setTransport(resultSet.getFloat("transportation"));
+                line.setTravel(resultSet.getFloat("travel"));
+                line.setTaxes(resultSet.getFloat("tax"));
+                line.setOther(resultSet.getFloat("other"));
+                line.setTotal(line.getHousing() + line.getFood() + line.getExits() + line.getTransport() + line.getTravel() + line.getTaxes() + line.getOther());
+            }
+        } catch (SQLException exception) {
+            Logger.getAnonymousLogger().log(Level.SEVERE, LocalDateTime.now() + ": Could not get last month expenses from database");
+        }
+        return line;
+    }
 }
