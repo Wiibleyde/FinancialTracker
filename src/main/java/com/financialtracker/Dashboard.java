@@ -20,6 +20,8 @@ public class Dashboard {
         // Initialize the pie chart with data
         Line lastMonthData = ExpenseDAO.getLastMonthExpenses();
 
+        if (lastMonthData.getTotal() == null) return;
+
         pieChart.getData().add(new PieChart.Data("Housing", lastMonthData.getHousing()));
         pieChart.getData().add(new PieChart.Data("Food", lastMonthData.getFood()));
         pieChart.getData().add(new PieChart.Data("Exits", lastMonthData.getExits()));
