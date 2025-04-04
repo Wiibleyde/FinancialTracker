@@ -1,7 +1,9 @@
 package com.financialtracker;
 
 import com.financialtracker.db.ExpenseDAO;
+import com.financialtracker.db.IncomeDAO;
 import javafx.fxml.FXML;
+import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
@@ -18,6 +20,9 @@ public class Dashboard {
 
     @FXML
     private LineChart<String, Number> lineChart; // Changer Date en String
+
+    @FXML
+    private BarChart<String, Number> barChart;
 
     @FXML
     private ChoiceBox<String> periodChoiceBox;
@@ -66,6 +71,26 @@ public class Dashboard {
 
         loadPeriodChoiceBox();
         setupChoiceBoxListener();
+
+        // Initialize the bar chart with data to show by period income vs expenses
+        List<IncomeLine> incomeLines = IncomeDAO.getIncomes();
+        List<Line> expenseLines = ExpenseDAO.getExpenses();
+        XYChart.Series<String, Number> incomeSeries = new XYChart.Series<>();
+        XYChart.Series<String, Number> expenseSeries = new XYChart.Series<>();
+        incomeSeries.setName("Income");
+        expenseSeries.setName("Expenses");
+        for (IncomeLine incomeLine : incomeLines) {
+            incomeSeries.getData().add(new XYChart.Data<>(incomeLine.getPeriod().toString(), incomeLine.getTotal()));
+        }
+        for (Line expenseLine : expenseLines) {
+            expenseSeries.getData().add(new XYChart.Data<>(expenseLine.getPeriod().toString(), expenseLine.getTotal()));
+        }
+
+        barChart.getData().add(incomeSeries);
+        barChart.getData().add(expenseSeries);
+        barChart.setTitle("Income vs Expenses");
+        barChart.setLegendVisible(true);
+
     }
 
     private void loadPieChartData() {

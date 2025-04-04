@@ -55,4 +55,8 @@ public class IncomeLine {
     public void setOther(Float other) {
         this.other = other;
     }
+
+    public Float getTotal() {
+        return salary + grant + businessSalary + passiveIncome + other;
+    }
 }
