@@ -6,6 +6,7 @@
 
 <VBox alignment="CENTER" stylesheets="@CSS/main-view.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.financialtracker.Dashboard">
     <fx:include fx:id="header" source="header.fxml" />
+    <ChoiceBox fx:id="periodChoiceBox" />
     <PieChart fx:id="pieChart" />
     <LineChart fx:id="lineChart" title="Line Chart Example">
         <xAxis>
