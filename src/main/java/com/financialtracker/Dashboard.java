@@ -102,7 +102,7 @@ public class Dashboard {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         for (int i = 0; i < 12; i++) {
-            periods.add(currentDate.minusMonths(i).format(formatter));
+            periods.add(currentDate.minusMonths(i).withDayOfMonth(1).format(formatter));
         }
 
         return periods;

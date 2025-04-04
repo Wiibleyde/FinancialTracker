@@ -5,6 +5,7 @@ import com.financialtracker.Line;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,12 @@ public class ExpenseDAO {
             var resultSet = statement.getResultSet();
             while (resultSet.next()) {
                 Line line = new Line();
-                line.setPeriod(java.sql.Date.valueOf(resultSet.getString("date")));
+                String dateString = resultSet.getString("date");
+                if (dateString.matches("\\d{4}-\\d{2}")) {
+                    dateString += "-01"; // Ajouter le jour par défaut
+                }
+                LocalDate date = LocalDate.parse(dateString);
+                line.setPeriod(java.sql.Date.valueOf(date));
                 line.setHousing(resultSet.getFloat("housing"));
                 line.setFood(resultSet.getFloat("food"));
                 line.setExits(resultSet.getFloat("goingOut"));
@@ -67,7 +73,12 @@ public class ExpenseDAO {
             statement.execute();
             var resultSet = statement.getResultSet();
             if (resultSet.next()) {
-                line.setPeriod(java.sql.Date.valueOf(resultSet.getString("date")));
+                String dateString = resultSet.getString("date");
+                if (dateString.matches("\\d{4}-\\d{2}")) {
+                    dateString += "-01"; // Ajouter le jour par défaut
+                }
+                LocalDate date = LocalDate.parse(dateString);
+                line.setPeriod(java.sql.Date.valueOf(date));
                 line.setHousing(resultSet.getFloat("housing"));
                 line.setFood(resultSet.getFloat("food"));
                 line.setExits(resultSet.getFloat("goingOut"));
@@ -93,7 +104,12 @@ public class ExpenseDAO {
             statement.execute();
             var resultSet = statement.getResultSet();
             if (resultSet.next()) {
-                line.setPeriod(java.sql.Date.valueOf(resultSet.getString("date")));
+                String dateString = resultSet.getString("date");
+                if (dateString.matches("\\d{4}-\\d{2}")) {
+                    dateString += "-01"; // Ajouter le jour par défaut
+                }
+                LocalDate date = LocalDate.parse(dateString);
+                line.setPeriod(java.sql.Date.valueOf(date));
                 line.setHousing(resultSet.getFloat("housing"));
                 line.setFood(resultSet.getFloat("food"));
                 line.setExits(resultSet.getFloat("goingOut"));

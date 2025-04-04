@@ -32,7 +32,11 @@ public class AddLineView {
     @FXML
     public void addLine() {
         Line newLine = new Line();
-        newLine.setPeriod(java.sql.Date.valueOf(periodField.getText()));
+        String periodText = periodField.getText();
+        if (periodText.matches("\\d{4}-\\d{2}")) {
+            periodText += "-01"; // Ajouter le jour par défaut
+        }
+        newLine.setPeriod(java.sql.Date.valueOf(periodText));
         newLine.setHousing(Float.parseFloat(housingField.getText()));
         newLine.setFood(Float.parseFloat(foodField.getText()));
         newLine.setExits(Float.parseFloat(exitsField.getText()));
