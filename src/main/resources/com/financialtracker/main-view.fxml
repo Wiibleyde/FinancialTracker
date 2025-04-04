@@ -70,6 +70,6 @@
                 </FXCollections>
             </items>
         </TableView>
-        <Button fx:id="addButton" text="Ajouter" onAction="#openAddLineView" />
+        <Button text="Ajouter" onAction="#openAddLineView" />
     </HBox>
 </VBox>

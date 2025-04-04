@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.financialtracker.AddIncomeView"
+            prefHeight="400.0" prefWidth="600.0">
+    <VBox alignment="CENTER" spacing="10.0">
+        <Label text="Période" />
+        <TextField fx:id="periodField" promptText="Période" />
+        <Label text="Salaire" />
+        <TextField fx:id="salaryField" promptText="Salaire" />
+        <Label text="Aides" />
+        <TextField fx:id="grantField" promptText="Aides" />
+        <Label text="Salaire d'auto entreprise"/>
+        <TextField fx:id="businessSalaryField" promptText="Salaire d'auto entreprise" />
+        <Label text="Revenus passifs" />
+        <TextField fx:id="passiveIncomeField" promptText="Revenus passifs" />
+        <Label text="Autres" />
+        <TextField fx:id="otherField" promptText="Autres" />
+        <Button text="Ajouter" onAction="#addIncome" />
+    </VBox>
+
+</AnchorPane>

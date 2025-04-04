@@ -28,7 +28,7 @@
                         <PropertyValueFactory property="grant" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="businessSalary" text="Aides">
+                <TableColumn fx:id="businessSalary" text="Salaire d'auto entreprise">
                     <cellValueFactory>
                         <PropertyValueFactory property="businessSalary" />
                     </cellValueFactory>
@@ -45,5 +45,6 @@
                 </TableColumn>
             </columns>
         </TableView>
+        <Button text="Ajouter un revenu" onAction="#openAddIncomeView" />
     </HBox>
 </VBox>
