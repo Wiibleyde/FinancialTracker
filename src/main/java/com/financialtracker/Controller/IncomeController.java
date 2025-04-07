@@ -1,6 +1,6 @@
 package com.financialtracker.Controller;
 
-import com.financialtracker.IncomeLine;
+import com.financialtracker.Model.IncomeLine;
 import com.financialtracker.db.IncomeDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;

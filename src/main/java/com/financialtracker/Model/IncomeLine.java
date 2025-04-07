@@ -1,4 +1,4 @@
-package com.financialtracker;
+package com.financialtracker.Model;
 
 public class IncomeLine {
     private String period;

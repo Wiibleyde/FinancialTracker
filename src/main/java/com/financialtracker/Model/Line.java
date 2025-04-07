@@ -1,9 +1,5 @@
-package com.financialtracker;
+package com.financialtracker.Model;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-
-import java.sql.Date;
 import java.time.LocalDate;
 
 public class Line {

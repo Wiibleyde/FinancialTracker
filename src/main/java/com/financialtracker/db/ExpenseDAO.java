@@ -1,6 +1,6 @@
 package com.financialtracker.db;
 
-import com.financialtracker.Line;
+import com.financialtracker.Model.Line;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

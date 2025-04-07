@@ -1,6 +1,6 @@
 package com.financialtracker.Controller;
 
-import com.financialtracker.Line;
+import com.financialtracker.Model.Line;
 import com.financialtracker.db.ExpenseDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;

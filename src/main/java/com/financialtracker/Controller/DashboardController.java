@@ -1,7 +1,7 @@
 package com.financialtracker.Controller;
 
-import com.financialtracker.IncomeLine;
-import com.financialtracker.Line;
+import com.financialtracker.Model.IncomeLine;
+import com.financialtracker.Model.Line;
 import com.financialtracker.db.ExpenseDAO;
 import com.financialtracker.db.IncomeDAO;
 import javafx.event.ActionEvent;
@@ -14,7 +14,6 @@ import javafx.scene.control.ChoiceBox;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DashboardController {

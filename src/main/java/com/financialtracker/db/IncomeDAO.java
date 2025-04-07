@@ -1,6 +1,6 @@
 package com.financialtracker.db;
 
-import com.financialtracker.IncomeLine;
+import com.financialtracker.Model.IncomeLine;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
