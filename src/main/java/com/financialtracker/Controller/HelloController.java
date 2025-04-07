@@ -28,7 +28,8 @@ public class HelloController {
 
     @FXML
     public void openAddLineView() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("add-line-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/financialtracker/add-line-view.fxml"));
+                new FXMLLoader(getClass().getResource("add-line-view.fxml"));
         Parent parent = fxmlLoader.load();
 
         LineController controller = fxmlLoader.getController();

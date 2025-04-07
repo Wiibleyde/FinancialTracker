@@ -32,7 +32,7 @@ public class IncomesController {
 
     @FXML
     public void openAddIncomeView() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("add-income-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/financialtracker/add-income-view.fxml"));
         Parent parent = fxmlLoader.load();
 
         IncomeController controller = fxmlLoader.getController();
