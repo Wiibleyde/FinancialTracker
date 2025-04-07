@@ -7,7 +7,7 @@
 <VBox alignment="CENTER" stylesheets="@CSS/main-view.css" xmlns="http://javafx.com/javafx/17.0.12"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.financialtracker.Controller.DashboardController">
     <fx:include fx:id="header" source="header.fxml"/>
-    <ChoiceBox fx:id="periodChoiceBox"/>
+    <ChoiceBox fx:id="periodChoiceBox" onAction="#changePeriod"/>
     <PieChart fx:id="pieChart"/>
     <LineChart fx:id="lineChart" title="Line Chart Example">
         <xAxis>

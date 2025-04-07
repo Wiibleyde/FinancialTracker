@@ -6,6 +6,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class IncomeController {
     @FXML
     private TextField periodField;
@@ -22,6 +25,8 @@ public class IncomeController {
 
     private IncomesController incomesController;
 
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
     public void setIncomesController(IncomesController incomesController) {
         this.incomesController = incomesController;
     }
@@ -30,10 +35,7 @@ public class IncomeController {
     public void addIncome() {
         IncomeLine incomeLine = new IncomeLine();
         String periodText = periodField.getText();
-        if (periodText.matches("\\d{4}-\\d{2}")) {
-            periodText += "-01"; // Ajouter le jour par défaut
-        }
-        incomeLine.setPeriod(periodText);
+        incomeLine.setPeriod(String.valueOf(LocalDate.parse(periodText, DATE_FORMAT)));
         incomeLine.setSalary(Float.parseFloat(salaryField.getText()));
         incomeLine.setGrant(Float.parseFloat(grantField.getText()));
         incomeLine.setBusinessSalary(Float.parseFloat(businessSalaryField.getText()));

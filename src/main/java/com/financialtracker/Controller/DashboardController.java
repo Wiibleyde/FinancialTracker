@@ -4,6 +4,7 @@ import com.financialtracker.IncomeLine;
 import com.financialtracker.Line;
 import com.financialtracker.db.ExpenseDAO;
 import com.financialtracker.db.IncomeDAO;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
@@ -31,68 +32,24 @@ public class DashboardController {
 
     private String currentPeriod;
 
+    private final static DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("MMM yy");
+    private final static DateTimeFormatter FULL_DATE_FORMAT = DateTimeFormatter.ofPattern("MMMM yyyy");
+
 
     @FXML
     public void initialize() {
-        // Initialize the pie chart with data
-        // Initialize the line chart with data
-        List<Line> expenses = ExpenseDAO.getExpenses();
-        String[] categories = {"Housing", "Food", "Exits", "Transport", "Travel", "Taxes", "Other"};
+        LocalDate date = LocalDate.now();
 
-        for (String category : categories) {
-            XYChart.Series<String, Number> series = new XYChart.Series<>(); // Changer Date en String
-            series.setName(category);
-            for (Line line : expenses) {
-                switch (category) {
-                    case "Housing":
-                        series.getData().add(new XYChart.Data<>(line.getPeriod().toString(), line.getHousing())); // Utiliser toString()
-                        break;
-                    case "Food":
-                        series.getData().add(new XYChart.Data<>(line.getPeriod().toString(), line.getFood())); // Utiliser toString()
-                        break;
-                    case "Exits":
-                        series.getData().add(new XYChart.Data<>(line.getPeriod().toString(), line.getExits())); // Utiliser toString()
-                        break;
-                    case "Transport":
-                        series.getData().add(new XYChart.Data<>(line.getPeriod().toString(), line.getTransport())); // Utiliser toString()
-                        break;
-                    case "Travel":
-                        series.getData().add(new XYChart.Data<>(line.getPeriod().toString(), line.getTravel())); // Utiliser toString()
-                        break;
-                    case "Taxes":
-                        series.getData().add(new XYChart.Data<>(line.getPeriod().toString(), line.getTaxes())); // Utiliser toString()
-                        break;
-                    case "Other":
-                        series.getData().add(new XYChart.Data<>(line.getPeriod().toString(), line.getOther())); // Utiliser toString()
-                        break;
-                }
-            }
-            lineChart.getData().add(series);
+        loadPieChartData();
+        loadLineChartData();
+        loadBarChart();
+
+        for (int i = 0; i < 12; i++) {
+            periodChoiceBox.getItems().add(date.format(FULL_DATE_FORMAT));
+            date = date.minusMonths(1);
         }
-        lineChart.setTitle("Expenses Over Time");
-
-        loadPeriodChoiceBox();
-        setupChoiceBoxListener();
-
-        // Initialize the bar chart with data to show by period income vs expenses
-        List<IncomeLine> incomeLines = IncomeDAO.getIncomes();
-        List<Line> expenseLines = ExpenseDAO.getExpenses();
-        XYChart.Series<String, Number> incomeSeries = new XYChart.Series<>();
-        XYChart.Series<String, Number> expenseSeries = new XYChart.Series<>();
-        incomeSeries.setName("Income");
-        expenseSeries.setName("Expenses");
-        for (IncomeLine incomeLine : incomeLines) {
-            incomeSeries.getData().add(new XYChart.Data<>(incomeLine.getPeriod().toString(), incomeLine.getTotal()));
-        }
-        for (Line expenseLine : expenseLines) {
-            expenseSeries.getData().add(new XYChart.Data<>(expenseLine.getPeriod().toString(), expenseLine.getTotal()));
-        }
-
-        barChart.getData().add(incomeSeries);
-        barChart.getData().add(expenseSeries);
-        barChart.setTitle("Income vs Expenses");
-        barChart.setLegendVisible(true);
-
+        periodChoiceBox.getSelectionModel().selectFirst();
+        currentPeriod = periodChoiceBox.getSelectionModel().getSelectedItem();
     }
 
     private void loadPieChartData() {
@@ -115,31 +72,70 @@ public class DashboardController {
         pieChart.setLabelsVisible(true);
     }
 
-    private void loadPeriodChoiceBox() {
-        List<String> periods = getLast12Periods();
-        periodChoiceBox.getItems().addAll(periods);
-        periodChoiceBox.getSelectionModel().selectFirst();
-        currentPeriod = periodChoiceBox.getValue();
-        loadPieChartData();
+    private void loadLineChartData() {
+        List<Line> expenses = ExpenseDAO.getExpenses();
+        String[] categories = {"Housing", "Food", "Exits", "Transport", "Travel", "Taxes", "Other"};
+
+        for (String category : categories) {
+            XYChart.Series<String, Number> series = new XYChart.Series<>();
+            series.setName(category);
+            for (Line line : expenses) {
+                switch (category) {
+                    case "Housing":
+                        series.getData().add(new XYChart.Data<>(line.getPeriod().toString(), line.getHousing()));
+                        break;
+                    case "Food":
+                        series.getData().add(new XYChart.Data<>(line.getPeriod().toString(), line.getFood()));
+                        break;
+                    case "Exits":
+                        series.getData().add(new XYChart.Data<>(line.getPeriod().toString(), line.getExits()));
+                        break;
+                    case "Transport":
+                        series.getData().add(new XYChart.Data<>(line.getPeriod().toString(), line.getTransport()));
+                        break;
+                    case "Travel":
+                        series.getData().add(new XYChart.Data<>(line.getPeriod().toString(), line.getTravel()));
+                        break;
+                    case "Taxes":
+                        series.getData().add(new XYChart.Data<>(line.getPeriod().toString(), line.getTaxes()));
+                        break;
+                    case "Other":
+                        series.getData().add(new XYChart.Data<>(line.getPeriod().toString(), line.getOther()));
+                        break;
+                }
+            }
+            lineChart.getData().add(series);
+        }
+        lineChart.setTitle("Expenses Over Time");
     }
 
-    private List<String> getLast12Periods() {
-        List<String> periods = new ArrayList<>();
-        LocalDate currentDate = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-        for (int i = 0; i < 12; i++) {
-            periods.add(currentDate.minusMonths(i).withDayOfMonth(1).format(formatter));
+    private void loadBarChart() {
+        List<IncomeLine> incomeLines = IncomeDAO.getIncomes();
+        List<Line> expenseLines = ExpenseDAO.getExpenses();
+        XYChart.Series<String, Number> incomeSeries = new XYChart.Series<>();
+        XYChart.Series<String, Number> expenseSeries = new XYChart.Series<>();
+        incomeSeries.setName("Income");
+        expenseSeries.setName("Expenses");
+        for (IncomeLine incomeLine : incomeLines) {
+            incomeSeries.getData().add(new XYChart.Data<>(incomeLine.getPeriod().toString(), incomeLine.getTotal()));
+        }
+        for (Line expenseLine : expenseLines) {
+            expenseSeries.getData().add(new XYChart.Data<>(expenseLine.getPeriod().toString(), expenseLine.getTotal()));
         }
 
-        return periods;
+        barChart.getData().add(incomeSeries);
+        barChart.getData().add(expenseSeries);
+        barChart.setTitle("Income vs Expenses");
+        barChart.setLegendVisible(true);
     }
 
-    private void setupChoiceBoxListener() {
-        periodChoiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            currentPeriod = newValue;
-            loadPieChartData();
-        });
+    public void changePeriod(ActionEvent actionEvent) {
+        var periodSelected = periodChoiceBox.getSelectionModel().getSelectedItem();
+        LocalDate dateSelected = LocalDate.parse("01 " + periodSelected, DateTimeFormatter.ofPattern("dd MMMM yyyy"));
+        currentPeriod = dateSelected.toString();
+        loadPieChartData();
+        loadLineChartData();
+        loadBarChart();
     }
 
 }

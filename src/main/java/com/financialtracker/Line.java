@@ -4,9 +4,10 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class Line {
-    private Date period;
+    private LocalDate period;
     private Float total;
     private Float housing;
     private Float food;
@@ -18,18 +19,11 @@ public class Line {
 
     public Line() {}
 
-    public StringProperty dateProperty() {
-        if (period == null) {
-            return new SimpleStringProperty("");
-        }
-        return new SimpleStringProperty(period.toString());
-    }
-
-    public Date getPeriod() {
+    public LocalDate getPeriod () {
         return period;
     }
 
-    public void setPeriod(Date period) {
+    public void setPeriod (LocalDate period) {
         this.period = period;
     }
 

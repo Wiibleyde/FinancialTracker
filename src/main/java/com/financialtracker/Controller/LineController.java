@@ -6,6 +6,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class LineController {
     @FXML
     private TextField periodField;
@@ -26,6 +29,8 @@ public class LineController {
 
     private HelloController mainController;
 
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
     public void setMainController(HelloController mainController) {
         this.mainController = mainController;
     }
@@ -34,10 +39,7 @@ public class LineController {
     public void addLine() {
         Line newLine = new Line();
         String periodText = periodField.getText();
-        if (periodText.matches("\\d{4}-\\d{2}")) {
-            periodText += "-01"; // Ajouter le jour par défaut
-        }
-        newLine.setPeriod(java.sql.Date.valueOf(periodText));
+        newLine.setPeriod(LocalDate.parse(periodText, DATE_FORMAT));
         newLine.setHousing(Float.parseFloat(housingField.getText()));
         newLine.setFood(Float.parseFloat(foodField.getText()));
         newLine.setExits(Float.parseFloat(exitsField.getText()));
