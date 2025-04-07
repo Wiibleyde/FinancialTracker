@@ -1,11 +1,12 @@
-package com.financialtracker;
+package com.financialtracker.Controller;
 
+import com.financialtracker.IncomeLine;
 import com.financialtracker.db.IncomeDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class AddIncomeView {
+public class IncomeController {
     @FXML
     private TextField periodField;
     @FXML

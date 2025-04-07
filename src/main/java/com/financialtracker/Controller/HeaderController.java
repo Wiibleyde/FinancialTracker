@@ -1,11 +1,12 @@
-package com.financialtracker;
+package com.financialtracker.Controller;
 
 
+import com.financialtracker.HelloApplication;
 import javafx.fxml.FXML;
 
 import java.io.IOException;
 
-public class Header {
+public class HeaderController {
     @FXML
     private void handleItem1() throws IOException {
         HelloApplication.changeScene("main-view.fxml");

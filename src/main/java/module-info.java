@@ -9,4 +9,6 @@ module com.financialtracker {
     exports com.financialtracker;
     exports com.financialtracker.db;
     opens com.financialtracker.db to javafx.fxml;
+    exports com.financialtracker.Controller;
+    opens com.financialtracker.Controller to javafx.fxml;
 }

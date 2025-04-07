@@ -1,5 +1,6 @@
-package com.financialtracker;
+package com.financialtracker.Controller;
 
+import com.financialtracker.IncomeLine;
 import com.financialtracker.db.IncomeDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -34,7 +35,7 @@ public class IncomesController {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("add-income-view.fxml"));
         Parent parent = fxmlLoader.load();
 
-        AddIncomeView controller = fxmlLoader.getController();
+        IncomeController controller = fxmlLoader.getController();
         controller.setIncomesController(this);
 
         Stage stage = new Stage();

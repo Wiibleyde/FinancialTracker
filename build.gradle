@@ -54,26 +54,26 @@ jlink {
         if (osName.contains("mac")) {
             installerType = "dmg"
             installerOptions = [
-                "--icon", file("src/main/resources/com/financialtracker/favicon.icns").absolutePath
+                "--icon", file("src/main/resources/com/financialtracker/icons/favicon.icns").absolutePath
             ]
             imageOptions = [
-                "--icon", file("src/main/resources/com/financialtracker/favicon.icns").absolutePath
+                "--icon", file("src/main/resources/com/financialtracker/icons/favicon.icns").absolutePath
             ]
         } else if (osName.contains("linux")) {
             installerType = "deb"
             installerOptions = [
-                "--icon", file("src/main/resources/com/financialtracker/favicon.png").absolutePath
+                "--icon", file("src/main/resources/com/financialtracker/icons/favicon.png").absolutePath
             ]
             imageOptions = [
-                "--icon", file("src/main/resources/com/financialtracker/favicon.png").absolutePath
+                "--icon", file("src/main/resources/com/financialtracker/icons/favicon.png").absolutePath
             ]
         } else if (osName.contains("windows")) {
             installerType = "exe"
             installerOptions = [
-                "--icon", file("src/main/resources/com/financialtracker/favicon.ico").absolutePath
+                "--icon", file("src/main/resources/com/financialtracker/icons/favicon.ico").absolutePath
             ]
             imageOptions = [
-                "--icon", file("src/main/resources/com/financialtracker/favicon.ico").absolutePath
+                "--icon", file("src/main/resources/com/financialtracker/icons/favicon.ico").absolutePath
             ]
         } else {
             throw new GradleException("Unsupported operating system: " + osName)

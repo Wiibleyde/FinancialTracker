@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class HelloApplication extends Application {
     private static Stage primaryStage;
@@ -31,7 +32,7 @@ public class HelloApplication extends Application {
         HelloApplication.setPrimaryStage(stage);
         HelloApplication.changeScene("dashboard-view.fxml");
         stage.setTitle("Finance Tracker");
-        stage.getIcons().add(new Image(HelloApplication.class.getResourceAsStream("/com/financialtracker/favicon.png")));
+        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/favicon.png"))));
         stage.show();
     }
 

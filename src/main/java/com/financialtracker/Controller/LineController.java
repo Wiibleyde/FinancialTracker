@@ -1,11 +1,12 @@
-package com.financialtracker;
+package com.financialtracker.Controller;
 
+import com.financialtracker.Line;
 import com.financialtracker.db.ExpenseDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class AddLineView {
+public class LineController {
     @FXML
     private TextField periodField;
     @FXML

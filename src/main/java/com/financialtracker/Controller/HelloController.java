@@ -1,9 +1,9 @@
-package com.financialtracker;
+package com.financialtracker.Controller;
 
+import com.financialtracker.Line;
 import com.financialtracker.db.ExpenseDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -27,11 +27,11 @@ public class HelloController {
     }
 
     @FXML
-    public void openAddLineView(ActionEvent event) throws IOException {
+    public void openAddLineView() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("add-line-view.fxml"));
         Parent parent = fxmlLoader.load();
 
-        AddLineView controller = fxmlLoader.getController();
+        LineController controller = fxmlLoader.getController();
         controller.setMainController(this);
 
         Stage stage = new Stage();

@@ -1,50 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <?import javafx.scene.control.cell.PropertyValueFactory?>
-<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.financialtracker.IncomesController" stylesheets="@CSS/main-view.css">
-    <fx:include source="header.fxml" />
+
+<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.financialtracker.Controller.IncomesController" stylesheets="@CSS/main-view.css">
+    <fx:include source="header.fxml"/>
 
     <HBox alignment="CENTER">
         <TableView fx:id="tableView" VBox.vgrow="ALWAYS">
             <columns>
-                <TableColumn fx:id="period" text="Période">
+                <TableColumn text="Période">
                     <cellValueFactory>
-                        <PropertyValueFactory property="period" />
+                        <PropertyValueFactory property="period"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="salary" text="Salaire">
+                <TableColumn text="Salaire">
                     <cellValueFactory>
-                        <PropertyValueFactory property="salary" />
+                        <PropertyValueFactory property="salary"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="grant" text="Aides">
+                <TableColumn text="Aides">
                     <cellValueFactory>
-                        <PropertyValueFactory property="grant" />
+                        <PropertyValueFactory property="grant"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="businessSalary" text="Salaire d'auto entreprise">
+                <TableColumn text="Salaire d'auto entreprise">
                     <cellValueFactory>
-                        <PropertyValueFactory property="businessSalary" />
+                        <PropertyValueFactory property="businessSalary"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="passiveIncome" text="Revenus passifs">
+                <TableColumn text="Revenus passifs">
                     <cellValueFactory>
-                        <PropertyValueFactory property="passiveIncome" />
+                        <PropertyValueFactory property="passiveIncome"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="other" text="Autres">
+                <TableColumn text="Autres">
                     <cellValueFactory>
-                        <PropertyValueFactory property="other" />
+                        <PropertyValueFactory property="other"/>
                     </cellValueFactory>
                 </TableColumn>
             </columns>
         </TableView>
-        <Button text="Ajouter un revenu" onAction="#openAddIncomeView" />
+        <Button text="Ajouter un revenu" onAction="#openAddIncomeView"/>
     </HBox>
 </VBox>

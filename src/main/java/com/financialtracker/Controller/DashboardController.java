@@ -1,5 +1,7 @@
-package com.financialtracker;
+package com.financialtracker.Controller;
 
+import com.financialtracker.IncomeLine;
+import com.financialtracker.Line;
 import com.financialtracker.db.ExpenseDAO;
 import com.financialtracker.db.IncomeDAO;
 import javafx.fxml.FXML;
@@ -14,7 +16,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Dashboard {
+public class DashboardController {
     @FXML
     private PieChart pieChart;
 
