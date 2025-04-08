@@ -116,12 +116,13 @@ public class DashboardController {
         incomeSeries.setName("Income");
         expenseSeries.setName("Expenses");
         for (IncomeLine incomeLine : incomeLines) {
-            incomeSeries.getData().add(new XYChart.Data<>(incomeLine.getPeriod().toString(), incomeLine.getTotal()));
+            incomeSeries.getData().add(new XYChart.Data<>(incomeLine.getPeriod(), incomeLine.getTotal()));
         }
         for (Line expenseLine : expenseLines) {
             expenseSeries.getData().add(new XYChart.Data<>(expenseLine.getPeriod().toString(), expenseLine.getTotal()));
         }
 
+        barChart.getData().clear();
         barChart.getData().add(incomeSeries);
         barChart.getData().add(expenseSeries);
         barChart.setTitle("Income vs Expenses");
