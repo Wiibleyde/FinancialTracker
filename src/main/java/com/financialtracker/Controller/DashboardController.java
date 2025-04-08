@@ -75,6 +75,8 @@ public class DashboardController {
         List<Line> expenses = ExpenseDAO.getExpenses();
         String[] categories = {"Housing", "Food", "Exits", "Transport", "Travel", "Taxes", "Other"};
 
+        lineChart.getData().clear();
+
         for (String category : categories) {
             XYChart.Series<String, Number> series = new XYChart.Series<>();
             series.setName(category);
@@ -134,8 +136,6 @@ public class DashboardController {
         LocalDate dateSelected = LocalDate.parse("01 " + periodSelected, DateTimeFormatter.ofPattern("dd MMMM yyyy"));
         currentPeriod = dateSelected.toString();
         loadPieChartData();
-        loadLineChartData();
-        loadBarChart();
     }
 
 }
