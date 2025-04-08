@@ -6,7 +6,7 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 
 <VBox alignment="CENTER" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.financialtracker.Controller.HelloController" stylesheets="@CSS/main-view.css">
+      fx:controller="com.financialtracker.Controller.AppController" stylesheets="@CSS/main-view.css">
     <fx:include source="header.fxml"/>
 
 

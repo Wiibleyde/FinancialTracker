@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
 import java.io.IOException;
 import java.util.Objects;
 
-public class HelloApplication extends Application {
+public class FinancialTrackerApp extends Application {
     private static Stage primaryStage;
 
     public static void setPrimaryStage(Stage stage) {
@@ -18,7 +18,7 @@ public class HelloApplication extends Application {
     }
 
     public static void changeScene(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(fxml));
+        FXMLLoader fxmlLoader = new FXMLLoader(FinancialTrackerApp.class.getResource(fxml));
         Scene scene = new Scene(fxmlLoader.load());
         primaryStage.setScene(scene);
     }
@@ -29,8 +29,8 @@ public class HelloApplication extends Application {
             System.out.println("Database is not OK");
             System.exit(1);
         }
-        HelloApplication.setPrimaryStage(stage);
-        HelloApplication.changeScene("dashboard-view.fxml");
+        FinancialTrackerApp.setPrimaryStage(stage);
+        FinancialTrackerApp.changeScene("dashboard-view.fxml");
         stage.setTitle("Finance Tracker");
         stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/favicon.png"))));
         stage.show();

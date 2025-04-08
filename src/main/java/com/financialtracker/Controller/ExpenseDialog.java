@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class LineController {
+public class ExpenseDialog {
     @FXML
     private TextField periodField;
     @FXML
@@ -27,11 +27,11 @@ public class LineController {
     @FXML
     private TextField otherField;
 
-    private HelloController mainController;
+    private AppController mainController;
 
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    public void setMainController(HelloController mainController) {
+    public void setMainController(AppController mainController) {
         this.mainController = mainController;
     }
 

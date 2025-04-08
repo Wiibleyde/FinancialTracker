@@ -1,7 +1,7 @@
 package com.financialtracker.Controller;
 
 
-import com.financialtracker.HelloApplication;
+import com.financialtracker.FinancialTrackerApp;
 import javafx.fxml.FXML;
 
 import java.io.IOException;
@@ -9,16 +9,16 @@ import java.io.IOException;
 public class HeaderController {
     @FXML
     private void handleItem1() throws IOException {
-        HelloApplication.changeScene("main-view.fxml");
+        FinancialTrackerApp.changeScene("main-view.fxml");
     }
 
     @FXML
     private void handleItem2() throws IOException {
-        HelloApplication.changeScene("dashboard-view.fxml");
+        FinancialTrackerApp.changeScene("dashboard-view.fxml");
     }
 
     @FXML
     private void handleItem3() throws IOException {
-        HelloApplication.changeScene("incomes-view.fxml");
+        FinancialTrackerApp.changeScene("incomes-view.fxml");
     }
 }

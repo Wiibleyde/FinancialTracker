@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloController {
+public class AppController {
     @FXML
     private TableView<Line> tableView;
 
@@ -32,7 +32,7 @@ public class HelloController {
                 new FXMLLoader(getClass().getResource("add-line-view.fxml"));
         Parent parent = fxmlLoader.load();
 
-        LineController controller = fxmlLoader.getController();
+        ExpenseDialog controller = fxmlLoader.getController();
         controller.setMainController(this);
 
         Stage stage = new Stage();
