@@ -4,26 +4,33 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" stylesheets="@CSS/main-view.css" xmlns="http://javafx.com/javafx/17.0.12"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.financialtracker.Controller.DashboardController">
-    <fx:include fx:id="header" source="header.fxml"/>
-    <ChoiceBox fx:id="periodChoiceBox" onAction="#changePeriod"/>
-    <PieChart fx:id="pieChart"/>
-    <LineChart fx:id="lineChart" title="Line Chart Example">
-        <xAxis>
-            <CategoryAxis side="BOTTOM" fx:id="xAxis"/>
-        </xAxis>
-        <yAxis>
-            <NumberAxis fx:id="yAxis" side="LEFT"/>
-        </yAxis>
-    </LineChart>
-    <BarChart fx:id="barChart">
-        <xAxis>
-            <CategoryAxis side="BOTTOM"/>
-        </xAxis>
-        <yAxis>
-            <NumberAxis side="LEFT"/>
-        </yAxis>
-    </BarChart>
-    <Label styleClass="page-title" text="Dashboard"/>
-</VBox>
+<BorderPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.financialtracker.Controller.DashboardController">
+    <top>
+        <fx:include fx:id="header" source="header.fxml"/>
+    </top>
+    <center>
+        <VBox alignment="CENTER" spacing="0" stylesheets="@CSS/dashboard-view.css">
+            <Label styleClass="page-title" text="Dashboard"/>
+            <ChoiceBox fx:id="periodChoiceBox" onAction="#changePeriod" styleClass="choice-box"/>
+            <HBox alignment="CENTER" spacing="15">
+                <PieChart fx:id="pieChart" styleClass="chart"/>
+                <BarChart fx:id="barChart" styleClass="chart">
+                    <xAxis>
+                        <CategoryAxis side="BOTTOM"/>
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis side="LEFT"/>
+                    </yAxis>
+                </BarChart>
+            </HBox>
+            <LineChart fx:id="lineChart" title="Line Chart Example" styleClass="chart">
+                <xAxis>
+                    <CategoryAxis side="BOTTOM" fx:id="xAxis"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis fx:id="yAxis" side="LEFT"/>
+                </yAxis>
+            </LineChart>
+        </VBox>
+    </center>
+</BorderPane>

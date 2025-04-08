@@ -4,10 +4,11 @@
 
 <MenuBar xmlns="http://javafx.com/javafx"
          xmlns:fx="http://javafx.com/fxml"
-         fx:controller="com.financialtracker.Controller.HeaderController">
-    <Menu text="Menu 1">
-        <MenuItem text="Tableau" onAction="#handleItem1"/>
-        <MenuItem text="Dashoard" onAction="#handleItem2"/>
-        <MenuItem text="Revenus" onAction="#handleItem3"/>
+         fx:controller="com.financialtracker.Controller.HeaderController"
+         style="-fx-background-color: #79addb; -fx-padding: 10;">
+    <Menu text="Menu" style="-fx-text-fill: #FFFFFF; -fx-font-size: 14px;">
+        <MenuItem text="Tableau" onAction="#handleItem1" style="-fx-text-fill: black;"/>
+        <MenuItem text="Dashboard" onAction="#handleItem2" style="-fx-text-fill: black;"/>
+        <MenuItem text="Revenus" onAction="#handleItem3" style="-fx-text-fill: black;"/>
     </Menu>
 </MenuBar>
